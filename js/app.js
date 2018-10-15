@@ -2,6 +2,7 @@ const cards = [
     "diamond","diamond","leaf","leaf","paper-plane-o","paper-plane-o","anchor","anchor","bolt","bolt","cube","cube","bicycle","bicycle","bomb","bomb"
 ];
 let openCards = [];
+let premCard = [];
 let matchedCards = [];
 let shuffledCards = shuffle(cards);
 let second = -1;
@@ -28,7 +29,7 @@ function renderCards() {
 
     }
     shuffle(cards);
-
+    startTimer();
 
 };
 
