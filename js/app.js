@@ -115,7 +115,8 @@ function restartGame() {
         deck.innerHTML="";
         matchedCards = [];
         clearTimeout(time);
-        second = -1;
+        second = 0;
+        timer.innerHTML = `${second}`;
         currentMoves = 0;
         moves.innerHTML = `${currentMoves}`;
         openCards = [];
