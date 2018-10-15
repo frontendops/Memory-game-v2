@@ -29,7 +29,6 @@ function renderCards() {
 
     }
     shuffle(cards);
-    startTimer();
 
 };
 
@@ -41,9 +40,13 @@ function openCard(card) {
             const lastCard = openCards[0];
 
             card.classList.add('show', 'open');
-            openCards.push(card)
+            openCards.push(card);
+            premCard.push(card);
 
             compareCards(thisCard, lastCard);
+            if (premCard.length === 1) {
+                startTimer();
+            }
         } else {
             card.classList.add('show', 'open');
             openCards.push(card);
@@ -116,6 +119,7 @@ function restartGame() {
         currentMoves = 0;
         moves.innerHTML = `${currentMoves}`;
         openCards = [];
+        premCard = [];
         renderCards();
         modulContainer.style.display = "none";
         stars.innerHTML = `<li><i class="fa fa-star"></i></li>
@@ -128,12 +132,6 @@ function startTimer() {
     second += 1;
     timer.innerHTML = `${second}`;
     time = setTimeout(startTimer, 1000);
-}
-
-function firstClick() {
-    if (openCards.length === 1) {
-        startTimer();
-    }
 }
 
 function moveCounter() {
@@ -167,5 +165,4 @@ function shuffle(array) {
     return array;
 }
 
-firstClick();
 renderCards();
