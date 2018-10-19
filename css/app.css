@@ -89,6 +89,8 @@ h1 {
     cursor: default;
     background: red;
     font-size: 33px;
+    transform: scale(1.1);
+    transition: 0.1s;
 }
 
 /*
