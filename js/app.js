@@ -4,18 +4,19 @@ let premCard = [];
 let matchedCards = [];
 let shuffledCards = shuffle(cards);
 let second = -1;
+let time;
 let timer = document.querySelector(".timer");
-let restart = document.querySelector(".restart");
 let moves = document.querySelector(".moves");
 let currentMoves = 0;
 const modulContainer = document.querySelector(".modulContainer");
-const button = document.querySelector(".button");
+document.querySelector(".restart").addEventListener("click", restartGame);
+document.querySelector(".button").addEventListener("click", restartGame);
 let stars = document.querySelector(".stars");
 
 const deck = document.querySelector(".deck");
 
 //rendering the cards and starting time
-(function renderCards() {
+let renderCards = function() {
   cards.map(card => {
     let el = document.createElement("li");
     el.classList.add("card");
@@ -24,12 +25,11 @@ const deck = document.querySelector(".deck");
     el.addEventListener("click", openCard);
   });
   shuffle(cards);
-})();
+};
 
 // what happens each time a card is clicked
 function openCard(e) {
   let card = e.target;
-  console.log(card);
   if (openCards.length === 1) {
     const thisCard = card;
     const lastCard = openCards[0];
@@ -157,3 +157,5 @@ function shuffle(array) {
 
   return array;
 }
+
+renderCards();
