@@ -48,20 +48,16 @@ function openCard(e) {
 // add and remove classes function
 function compareCards(thisCard, lastCard) {
   if (thisCard.innerHTML === lastCard.innerHTML) {
-    thisCard.classList.add("match");
-    lastCard.classList.add("match");
-
+    addClasses(thisCard, lastCard, "add", ["match"]);
     matchedCards.push(thisCard, lastCard);
 
     openCards = [];
     endGame();
   } else {
-    thisCard.classList.add("wrong");
-    lastCard.classList.add("wrong");
+    addClasses(thisCard, lastCard, "add", ["wrong"]);
 
     setTimeout(function() {
-      thisCard.classList.remove("show", "open", "wrong");
-      lastCard.classList.remove("show", "open", "wrong");
+      addClasses(thisCard, lastCard, "remove", ["show", "open", "wrong"]);
     }, 800);
 
     openCards = [];
@@ -70,6 +66,16 @@ function compareCards(thisCard, lastCard) {
   rank();
   moveCounter();
   endGame();
+}
+
+function addClasses(first, second, option, classes) {
+  if (option === "remove") {
+    first.classList.remove(...classes);
+    second.classList.remove(...classes);
+  } else if (option === "add") {
+    first.classList.add(...classes);
+    second.classList.add(...classes);
+  }
 }
 
 /* when the number of the matched cards array is the same
