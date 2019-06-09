@@ -1,6 +1,6 @@
 import cards from "./cards.js";
 let openCards = [];
-let premCard = [];
+let matchAttempts = 0;
 let matchedCards = [];
 let shuffledCards = shuffle(cards);
 let second = -1;
@@ -30,32 +30,28 @@ let renderCards = function() {
 // what happens each time a card is clicked
 function openCard(e) {
   let card = e.target;
+  card.classList.add("show", "open");
   if (openCards.length === 1) {
     const thisCard = card;
     const lastCard = openCards[0];
 
-    card.classList.add("show", "open");
     openCards.push(card);
-    premCard.push(card);
-
+    matchAttempts++;
     compareCards(thisCard, lastCard);
-    if (premCard.length === 1) {
-      startTimer();
-    }
+    matchAttempts === 1 ? startTimer() : null;
   } else {
-    card.classList.add("show", "open");
     openCards.push(card);
   }
 }
 
 //comparing 2 cards at a time and then reseting open cards array
+// add and remove classes function
 function compareCards(thisCard, lastCard) {
   if (thisCard.innerHTML === lastCard.innerHTML) {
     thisCard.classList.add("match");
     lastCard.classList.add("match");
 
-    matchedCards.push(thisCard);
-    matchedCards.push(lastCard);
+    matchedCards.push(thisCard, lastCard);
 
     openCards = [];
     endGame();
@@ -110,7 +106,7 @@ function restartGame() {
   currentMoves = 0;
   moves.innerHTML = `${currentMoves}`;
   openCards = [];
-  premCard = [];
+  matchAttempts = 0;
   renderCards();
   modulContainer.style.display = "none";
   stars.innerHTML = `<li><i class="fa fa-star"></i></li>
