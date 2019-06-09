@@ -15,38 +15,37 @@ let stars = document.querySelector(".stars");
 const deck = document.querySelector(".deck");
 
 //rendering the cards and starting time
-function renderCards() {
-  for (let i = 0; i < cards.length; i++) {
-    let card = document.createElement("li");
-    card.innerHTML += `<i class="fa fa-${cards[i]}"></i>`;
-    card.classList.add("card");
-    deck.appendChild(card);
-
-    openCard(card);
-  }
+(function renderCards() {
+  cards.map(card => {
+    let el = document.createElement("li");
+    el.classList.add("card");
+    el.innerHTML = `<i class="fa fa-${card}"></i>`;
+    deck.appendChild(el);
+    el.addEventListener("click", openCard);
+  });
   shuffle(cards);
-}
+})();
 
 // what happens each time a card is clicked
-function openCard(card) {
-  card.addEventListener("click", function() {
-    if (openCards.length === 1) {
-      const thisCard = card;
-      const lastCard = openCards[0];
+function openCard(e) {
+  let card = e.target;
+  console.log(card);
+  if (openCards.length === 1) {
+    const thisCard = card;
+    const lastCard = openCards[0];
 
-      card.classList.add("show", "open");
-      openCards.push(card);
-      premCard.push(card);
+    card.classList.add("show", "open");
+    openCards.push(card);
+    premCard.push(card);
 
-      compareCards(thisCard, lastCard);
-      if (premCard.length === 1) {
-        startTimer();
-      }
-    } else {
-      card.classList.add("show", "open");
-      openCards.push(card);
+    compareCards(thisCard, lastCard);
+    if (premCard.length === 1) {
+      startTimer();
     }
-  });
+  } else {
+    card.classList.add("show", "open");
+    openCards.push(card);
+  }
 }
 
 //comparing 2 cards at a time and then reseting open cards array
@@ -158,5 +157,3 @@ function shuffle(array) {
 
   return array;
 }
-
-renderCards();
