@@ -7,7 +7,7 @@
 
 ## Instructions
 
-This is a game where you need to match two cards together. Click on one and another if its wrong it will flip back over. Timer starts when you perform your first match, each move will be counted aswell.
+This is a game where you need to match two cards together. Click on one and then another, if they do not match they flip back over. Timer starts when you perform your first match, each move will be counted aswell.
 
 ### How to run
 
